@@ -28,3 +28,10 @@ foreach ($ignores as $ignore) {
 if (!file_exists('../.gitignore')) {
     file_put_contents('../.gitignore', "_cache/\n");
 }
+
+// Create .htaccess file
+$htaccess = "<IfModule mod_rewrite.c>\n";
+$htaccess .= "RewriteEngine On\n";
+$htaccess .= "RewriteRule .* execute.php [L]\n";
+$htaccess .= "</IfModule>\n";
+file_put_contents('../.htaccess', $htaccess);
