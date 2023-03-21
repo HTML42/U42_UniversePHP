@@ -32,6 +32,6 @@ if (!file_exists('../.gitignore')) {
 // Create .htaccess file
 $htaccess = "<IfModule mod_rewrite.c>\n";
 $htaccess .= "RewriteEngine On\n";
-$htaccess .= "RewriteRule .* execute.php [L]\n";
+$htaccess .= "RewriteRule .* universephp/execute.php [L]\n";
 $htaccess .= "</IfModule>\n";
 file_put_contents('../.htaccess', $htaccess);
