@@ -32,12 +32,15 @@ if (isset($route['redirect']) && is_string($route['redirect'])) {
 $handler_class = null;
 if (isset($route['handler']) && is_string($route['handler'])) {
     $handler_classname = strstr($route['handler'], '::', true);
+    var_dump($handler_classname);
     $handler_class = new $handler_classname;
+    var_dump($handler_class);
 }
 
 // Initialize handler method if available based on route configuration
 if (is_object($handler_class) && method_exists($handler_class, $route['handler'])) {
     $handler_method = $route['handler'];
+    var_dump($handler_method);
     $handler_class->$handler_method();
 }
 
