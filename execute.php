@@ -10,8 +10,7 @@ foreach ($classes as $class) {
     }
 }
 $route = matchRoute(ROUTES, $_SERVER['REQUEST_URI']);
-var_dump(Request::$path);
-var_dump(Request::$clean_path);
+var_dump(get_class_vars('Request'));
 var_dump($route);
 
 function matchRoute($routes, $url) {
