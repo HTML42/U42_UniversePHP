@@ -8,6 +8,9 @@ require_once(DIR_CLASSES . 'response.class.php');
 require_once(DIR_CLASSES . 'supermodel.class.php');
 require_once(DIR_CLASSES . 'universe.class.php');
 require_once(DIR_CLASSES . 'file.class.php');
+foreach (glob(DIR_HANDLER . '*.handler.php') as $handler_class_filepath) {
+    require_once $handler_class_filepath;
+}
 
 // Set asset prefix based on requested URL path
 $asset_prefix = '';
@@ -28,10 +31,7 @@ if (isset($route['redirect']) && is_string($route['redirect'])) {
 // Load handler class based on route configuration
 $handler_class = null;
 if (isset($route['handler']) && is_string($route['handler'])) {
-    $try_list = File::_create_try_list($route['handler'], ['php'], [DIR_CLASSES . 'handlers' . DIRECTORY_SEPARATOR]);
-    $handler_file = File::instance_of_first_existing_file($try_list);
-    $handler_classname = File::_name($handler_file->path);
-    require_once($handler_file->path);
+    $handler_classname = strstr($route['handler'], '::', true);
     $handler_class = new $handler_classname;
 }
 
