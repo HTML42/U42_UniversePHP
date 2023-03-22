@@ -5,6 +5,7 @@ include __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'lib' . D
 require_once(DIR_CLASSES . 'utilities.class.php');
 require_once(DIR_CLASSES . 'request.class.php');
 require_once(DIR_CLASSES . 'response.class.php');
+require_once(DIR_CLASSES . 'supermodel.class.php');
 
 $GLOBALS['ASSET_PREFIX'] = '';
 for ($i = 0; $i < count(Request::$requested_clean_path_array) - 1; $i++) {
