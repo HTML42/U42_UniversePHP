@@ -11,6 +11,7 @@ define('DIR_HANDLER', DIR_PROJECT . '/handler/');
 define('DIR_SUPERMODELS', DIR_PROJECT . '/supermodels/');
 define('DIR_VIEWS', DIR_PROJECT . '/views/');
 define('DIR_CONTROLLER', DIR_PROJECT . '/controller/');
+define('DIR_MODES', DIR_FRAMEWORK . '/modes/');
 
 define('HOUR', 3600);
 define('DAY', HOUR * 24);
@@ -28,6 +29,14 @@ foreach ($controller_files as $controller_file) {
 }
 
 define('ROUTES', $routes);
+
+foreach (glob(DIR_HANDLER . '*.handler.php') as $handler_class_filepath) {
+    require_once $handler_class_filepath;
+}
+
+foreach (glob(DIR_SUPERMODELS . '*.supermodel.php') as $handler_class_filepath) {
+    require_once $handler_class_filepath;
+}
 
 define('FILE_ENVIRONMENT', DIR_PROJECT . 'env');
 

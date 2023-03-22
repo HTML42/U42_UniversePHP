@@ -7,7 +7,8 @@ class Universe {
             'view' => 'views/errorpages/404',
             'mime' => 'text/plain',
             'encoding' => 'utf-8',
-            'html_base' => 'templates/base.html'
+            'html_base' => 'templates/base.html',
+            'mode' => 'html'
         ];
         foreach (ROUTES as $route) {
             $pattern = '#' . $route['path'] . '#U';
@@ -19,6 +20,7 @@ class Universe {
                 $mime = isset($route['mime']) ? $route['mime'] : $default_view['mime'];
                 $encoding = isset($route['encoding']) ? $route['encoding'] : $default_view['encoding'];
                 $html_base = isset($route['html_base']) ? $route['html_base'] : $default_view['html_base'];
+                $mode = isset($route['mode']) ? $route['mode'] : $default_view['mode'];
                 return [
                     'handler' => isset($route['handler']) ? $route['handler'] : null,
                     'view' => $view,
@@ -27,6 +29,7 @@ class Universe {
                     'mime' => $mime,
                     'encoding' => $encoding,
                     'html_base' => $html_base,
+                    'mode' => $mode
                 ];
             }
         }

@@ -8,9 +8,6 @@ require_once(DIR_CLASSES . 'response.class.php');
 require_once(DIR_CLASSES . 'supermodel.class.php');
 require_once(DIR_CLASSES . 'universe.class.php');
 require_once(DIR_CLASSES . 'file.class.php');
-foreach (glob(DIR_HANDLER . '*.handler.php') as $handler_class_filepath) {
-    require_once $handler_class_filepath;
-}
 
 // Set asset prefix based on requested URL path
 $asset_prefix = '';
@@ -46,7 +43,15 @@ if (is_object($handler_class) && $handler_method && method_exists($handler_class
 
 // Get the file content of the view based on route configuration
 if (isset($route['view']) && is_string($route['view'])) {
-    $try_list = File::_create_try_list($route['view'], ['php', 'html', 'htm', 'tpl'], [DIR_VIEWS]);
+    $try_list = File::_create_try_list($route['view'], ['php', 'html', 'htm', 'tpl', 'js', 'css', 'scss', 'less'], [DIR_VIEWS]);
     $view_file = File::instance_of_first_existing_file($try_list);
     echo $view_file->get_content();
+}
+
+// Include mode-specific file if specified in route
+if (isset($route['mode'])) {
+    $mode_file = File::instance(DIR_MODES . $route['mode']);
+    if($mode_file->exists) {
+        include $mode_file->path;
+    }
 }
