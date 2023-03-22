@@ -10,6 +10,7 @@ foreach ($classes as $class) {
     }
 }
 $route = matchRoute(ROUTES, Request::$requested_clean_path);
+var_dump(ROUTES);
 var_dump(get_class_vars('Request'));
 var_dump($route);
 
