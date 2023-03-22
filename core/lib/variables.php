@@ -33,8 +33,6 @@ define('FILE_ENVIRONMENT', DIR_PROJECT . 'env');
 
 define('ENV', is_file(FILE_ENVIRONMENT) ? strtolower(trim(file_get_contents(FILE_ENVIRONMENT))) : 'DEV');
 
-define('BASEURL', 'http' . (is_https() ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . '/' . Request::$url_path_to_script);
-
 $GLOBALS['ASSET_PREFIX'] = '';
 for ($i = 0; $i < count(Request::$requested_clean_path_array) - 1; $i++) {
     $GLOBALS['ASSET_PREFIX'] .= '../';
