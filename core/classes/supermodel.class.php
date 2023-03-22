@@ -1,1 +1,5 @@
-<?php\nclass Supermodel {\n\n}
+<?php
+
+class Supermodel {
+    
+}
