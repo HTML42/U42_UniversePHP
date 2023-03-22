@@ -9,7 +9,7 @@ foreach ($classes as $class) {
         require_once(DIR_CLASSES . $class);
     }
 }
-$route = matchRoute(ROUTES, $_SERVER['REQUEST_URI']);
+$route = matchRoute(ROUTES, Request::$requested_clean_path);
 var_dump(get_class_vars('Request'));
 var_dump($route);
 
