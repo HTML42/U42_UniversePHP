@@ -18,7 +18,7 @@ function matchRoute($routes, $url) {
     foreach ($routes as $route) {
         $pattern = '#' . $route['path'] . '#U';
         $pattern_match = strstr($route['path'], '(') && strstr($route['path'], ')') && preg_match($pattern, $url, $params);
-        $exact_match = $route['path'] == Request::$clean_path;
+        $exact_match = $route['path'] == Request::$requested_clean_path;
         if ($exact_match || $pattern_match) {
             array_shift($params);
             list($handler_class, $handler_method) = explode('::', $route['handler']);
