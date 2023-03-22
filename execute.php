@@ -37,8 +37,7 @@ if (isset($route['handler']) && is_string($route['handler'])) {
     $handler_method = $handler_class_parts[1] ?? null;
     $handler_class = new $handler_classname();
 }
-var_dump($handler_class);
-var_dump($handler_method);
+
 // Initialize handler method if available based on route configuration
 if (is_object($handler_class) && $handler_method && method_exists($handler_class, $handler_method)) {
     $handler_class->$handler_method();
