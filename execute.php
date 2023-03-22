@@ -20,7 +20,7 @@ function matchRoute($routes, $url) {
         $pattern_match = strstr($route['path'], '(') && strstr($route['path'], ')') && preg_match($pattern, $url, $params);
         $exact_match = $route['path'] == Request::$requested_clean_path;
         if ($exact_match || $pattern_match) {
-            list($handler_class, $handler_method) = explode('::', @$route['handler']);
+            @list($handler_class, $handler_method) = explode('::', @$route['handler']);
             return [
                 'handler' => isset($route['handler']) ? $route['handler'] : null,
                 'view' => isset($route['view']) ? $route['view'] : null,
