@@ -34,7 +34,6 @@ function matchRoute($routes, $url) {
                 'code' => isset($route['code']) ? $route['code'] : 200,
             ];
         }
-        echo "Route not matched: " . $route['path'] . PHP_EOL;
     }
     return null;
 }
