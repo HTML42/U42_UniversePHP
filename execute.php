@@ -30,19 +30,23 @@ if (isset($route['redirect']) && is_string($route['redirect'])) {
 
 // Load handler class based on route configuration
 $handler_class = null;
+$handler_method = null;
 if (isset($route['handler']) && is_string($route['handler'])) {
-    $handler_classname = strstr($route['handler'], '::', true);
-    var_dump($handler_classname);
-    $handler_class = new $handler_classname;
-    var_dump($handler_class);
+    $handler_class_parts = explode('::', $route['handler']);
+    $handler_classname = $handler_class_parts[0];
+    $handler_method = $handler_class_parts[1] ?? null;
+    $handler_class_path = DIR_HANDLER . str_replace('\\', DIRECTORY_SEPARATOR, $handler_classname) . '.php';
+    if (file_exists($handler_class_path)) {
+        require_once $handler_class_path;
+        $handler_class = new $handler_classname();
+    }
 }
 
 // Initialize handler method if available based on route configuration
-if (is_object($handler_class) && method_exists($handler_class, $route['handler'])) {
-    $handler_method = $route['handler'];
-    var_dump($handler_method);
+if (is_object($handler_class) && $handler_method && method_exists($handler_class, $handler_method)) {
     $handler_class->$handler_method();
 }
+
 
 // Get the file content of the view based on route configuration
 if (isset($route['view']) && is_string($route['view'])) {
