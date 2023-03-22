@@ -1,7 +1,7 @@
 <?php
 
 // Create necessary directories
-$dirs = ['_cache', 'controller', 'handler', 'supermodels', 'views'];
+$dirs = ['_cache', 'controller', 'handler', 'supermodels', 'views', 'templates'];
 foreach ($dirs as $dir) {
     if (!file_exists('../' . $dir)) {
         mkdir('../' . $dir);
