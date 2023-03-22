@@ -22,8 +22,10 @@ function matchRoute($routes, $url) {
         if ($exact_match || $pattern_match) {
             list($handler_class, $handler_method) = explode('::', $route['handler']);
             return [
-                'handler' => $route['handler'],
-                'view' => $route['view']
+                'handler' => isset($route['handler']) ? $route['handler'] : null,
+                'view' => isset($route['view']) ? $route['view'] : null,
+                'redirect' => isset($route['redirect']) ? $route['redirect'] : null,
+                'code' => isset($route['code']) ? $route['code'] : 200,
             ];
         }
         echo "Route not matched: " . $route['path'] . PHP_EOL;
