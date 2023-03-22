@@ -9,3 +9,26 @@ foreach ($classes as $class) {
         require_once(DIR_CLASSES . $class);
     }
 }
+$route = matchRoute(ROUTES, Request::$url);
+var_dump(Request::$url);
+var_dump(Request::$path);
+var_dump(Request::$clean_path);
+var_dump($route);
+
+function matchRoute($routes, $url) {
+    foreach ($routes as $route) {
+        $pattern = '#' . $route['path'] . '#U';
+        $pattern_match = strstr($route['path'], '(') && strstr($route['path'], ')') && preg_match($pattern, $url, $params);
+        $exact_match = $route['path'] == Request::$clean_path;
+        if ($exact_match || $pattern_match) {
+            array_shift($params);
+            list($handler_class, $handler_method) = explode('::', $route['handler']);
+            return [
+                'handler' => $route['handler'],
+                'view' => $route['view']
+            ];
+        }
+        echo "Route not matched: " . $route['path'] . PHP_EOL;
+    }
+    return null;
+}
