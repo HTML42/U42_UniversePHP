@@ -2,47 +2,23 @@
 
 class Request {
 
-    public static $url;
-    public static $path;
-    public static $clean_path;
-    public static $method;
-    public static $params = array();
+    public static $url_path_to_script, $requested_path, $requested_path_array, $requested_clean_path, $requested_clean_path_array;
 
     public static function init() {
-        self::$url = self::getCurrentUrl();
-        self::$path = self::getCurrentPath();
-        self::$clean_path = self::getCurrentCleanPath();
-        self::$method = $_SERVER['REQUEST_METHOD'];
-        self::$params = self::getCurrentParams();
-    }
-
-    public static function getCurrentUrl() {
-        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-        $url = $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        return $url;
-    }
-
-    public static function getCurrentPath() {
-        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $path = trim($path, '/');
-        return $path;
-    }
-
-    public static function getCurrentParams() {
-        $params = array();
-        parse_str($_SERVER['QUERY_STRING'], $params);
-        return $params;
-    }
-
-    public static function getCurrentCleanPath() {
-        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $baseUrl = str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']);
-        $cleanPath = str_replace($baseUrl, '', $path);
-        $cleanPath = explode('?', $cleanPath)[0]; // remove query string
-        $cleanPath = trim($cleanPath, '/');
-        return $cleanPath;
+        $path_to_script = str_replace(basename($_SERVER["SCRIPT_NAME"]), '', $_SERVER["SCRIPT_NAME"]);
+        if (substr($path_to_script, 0, 1) == '/') {
+            $path_to_script = substr($path_to_script, 1);
+        }
+        self::$url_path_to_script = str_replace('core/classes/', '', $path_to_script);
+        preg_match('/\/*(.*)\/*/', $_SERVER['REQUEST_URI'], $match);
+        if (strstr($match[1], '?')) {
+            $match[1] = preg_replace('/\?.*/', '', $match[1]);
+        }
+        self::$requested_path = $match[1];
+        self::$requested_path_array = array_filter(explode('/', Request::$requested_path), 'strlen');
+        self::$requested_clean_path = str_replace(self::$url_path_to_script, '', self::$requested_path);
+        self::$requested_clean_path_array = array_filter(explode('/', Request::$requested_clean_path), 'strlen');
     }
 
 }
-
 Request::init();

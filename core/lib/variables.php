@@ -12,6 +12,10 @@ define('DIR_MODELS', DIR_PROJECT . '/models/');
 define('DIR_VIEWS', DIR_PROJECT . '/views/');
 define('DIR_CONTROLLERS', DIR_PROJECT . '/controllers/');
 
+define('HOUR', 3600);
+define('DAY', HOUR * 24);
+define('WEEK', DAY * 7);
+
 $routes = array();
 $controller_files = glob(DIR_CONTROLLERS . '/*.json');
 foreach ($controller_files as $controller_file) {
@@ -24,3 +28,7 @@ foreach ($controller_files as $controller_file) {
 }
 
 define('ROUTES', $routes);
+
+define('FILE_ENVIRONMENT', DIR_PROJECT . 'env');
+
+define('ENV', is_file(FILE_ENVIRONMENT) ? strtolower(trim(file_get_contents(FILE_ENVIRONMENT))) : 'DEV');
