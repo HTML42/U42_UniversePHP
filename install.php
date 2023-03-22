@@ -1,4 +1,5 @@
 <?php
+
 // Create environment file
 if (!file_exists('../env')) {
     file_put_contents('../env', 'DEV');
@@ -35,3 +36,17 @@ $htaccess .= "RewriteEngine On\n";
 $htaccess .= "RewriteRule .* universephp/execute.php [L]\n";
 $htaccess .= "</IfModule>\n";
 file_put_contents('../.htaccess', $htaccess);
+
+// Create /controller/index.controller.json
+$index_controller = ["name" => "IndexController", "routes" => [
+        ["id" => 1, "method" => "GET", "path" => "/index/index", "handler" => "IndexHandler::index", "view" => "/views/index/index"],
+        ["id" => 2, "method" => "*", "path" => "/", "redirect" => "/index/index"],
+        ["id" => 3, "method" => "*", "path" => "/index", "redirect" => "/index/index"],
+        ["id" => 4, "method" => "*", "path" => "/index.html", "redirect" => "/index/index"]
+    ],
+    "supermodels" => ["IndexSupermodel"]
+];
+
+$json = json_encode($index_controller, JSON_PRETTY_PRINT);
+file_put_contents('../controller/index.controller.json', $json);
+
