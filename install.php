@@ -1,13 +1,5 @@
 <?php
 
-// Create environment file
-if (!file_exists('../env')) {
-    file_put_contents('../env', 'DEV');
-} else {
-    echo "Environment file already exists.";
-    exit;
-}
-
 // Create necessary directories
 $dirs = ['_cache', 'controller', 'handler', 'supermodels', 'views'];
 foreach ($dirs as $dir) {
@@ -38,39 +30,37 @@ $htaccess .= "</IfModule>\n";
 file_put_contents('../.htaccess', $htaccess);
 
 // Create /controller/index.controller.json
-$index_controller = [
-    "name" => "IndexController",
-    "routes" => [
-        [
-            "id" => 1,
-            "method" => "GET",
-            "path" => "index/index",
-            "handler" => "IndexHandler::index",
-            "view" => "views/index/index"
-        ],
-        [
-            "id" => 2,
-            "method" => "*",
-            "path" => "",
-            "redirect" => "index/index"
-        ],
-        [
-            "id" => 3,
-            "method" => "*",
-            "path" => "index",
-            "redirect" => "index/index"
-        ],
-        [
-            "id" => 4,
-            "method" => "*",
-            "path" => "index.html",
-            "redirect" => "index/index"
-        ]
+$json = '{
+    "name": "IndexController",
+    "routes": [
+        {
+            "id": 1,
+            "method": "GET",
+            "path": "index/index",
+            "handler": "IndexHandler::index",
+            "view": "views/index/index"
+        },
+        {
+            "id": 2,
+            "method": "*",
+            "path": "",
+            "redirect": "index/index"
+        },
+        {
+            "id": 3,
+            "method": "*",
+            "path": "index",
+            "redirect": "index/index"
+        },
+        {
+            "id": 4,
+            "method": "*",
+            "path": "index.html",
+            "redirect": "index/index"
+        }
     ],
-    "supermodels" => ["IndexSupermodel"]
-];
-
-$json = json_encode($index_controller, JSON_PRETTY_PRINT);
+    "supermodels": ["IndexSupermodel"]
+}';
 $json = str_replace('\/', '/', $json); // Fix the path in JSON
 file_put_contents('../controller/index.controller.json', $json);
 
@@ -92,6 +82,16 @@ if (!file_exists('../supermodels')) {
 if (!file_exists('../supermodels/index.supermodel.php')) {
     $index_supermodel_content = "<?php\nclass IndexSupermodel extends Supermodel {\n\n}";
     file_put_contents('../supermodels/index.supermodel.php', $index_supermodel_content);
+}
+
+// Create views/index/index.html
+if (!file_exists('../views/index')) {
+    mkdir('../views/index');
+}
+
+if (!file_exists('../views/index/index.html')) {
+    $index_view_content = "<h1>Sinnvolle Webseite Standard Überschrift</h1>\n<h2>Lorem Ipsum</h2>\n<p>Lorem Ipsum</p>";
+    file_put_contents('../views/index/index.html', $index_view_content);
 }
 
 echo "Installation complete.";
