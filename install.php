@@ -44,27 +44,27 @@ $index_controller = [
         [
             "id" => 1,
             "method" => "GET",
-            "path" => "/index/index",
+            "path" => "index/index",
             "handler" => "IndexHandler::index",
-            "view" => "/views/index/index"
+            "view" => "views/index/index"
         ],
         [
             "id" => 2,
             "method" => "*",
-            "path" => "/",
-            "redirect" => "/index/index"
+            "path" => "",
+            "redirect" => "index/index"
         ],
         [
             "id" => 3,
             "method" => "*",
-            "path" => "/index",
-            "redirect" => "/index/index"
+            "path" => "index",
+            "redirect" => "index/index"
         ],
         [
             "id" => 4,
             "method" => "*",
-            "path" => "/index.html",
-            "redirect" => "/index/index"
+            "path" => "index.html",
+            "redirect" => "index/index"
         ]
     ],
     "supermodels" => ["IndexSupermodel"]
