@@ -2,17 +2,13 @@
 
 include __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'variables.php';
 
-$classes = array_diff(scandir(DIR_CLASSES), array('.', '..'));
+require_once(DIR_CLASSES . 'utilities.class.php');
+require_once(DIR_CLASSES . 'request.class.php');
 
-foreach ($classes as $class) {
-    if (is_file(DIR_CLASSES . $class)) {
-        require_once(DIR_CLASSES . $class);
-    }
-}
 $route = matchRoute(ROUTES, Request::$requested_clean_path);
 
 var_dump($route);
-if(isset($route['redirect']) && is_string($route['redirect'])) {
+if (isset($route['redirect']) && is_string($route['redirect'])) {
     Utilities::redirect(BASEURL . $route['redirect'], $route['code']);
 }
 
