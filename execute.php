@@ -10,9 +10,11 @@ foreach ($classes as $class) {
     }
 }
 $route = matchRoute(ROUTES, Request::$requested_clean_path);
-var_dump(ROUTES);
-var_dump(get_class_vars('Request'));
+
 var_dump($route);
+if(isset($route['redirect']) && is_string($route['redirect'])) {
+    Utilities::redirect(BASEURL . $route['redirect'], $route['code']);
+}
 
 function matchRoute($routes, $url) {
     foreach ($routes as $route) {
