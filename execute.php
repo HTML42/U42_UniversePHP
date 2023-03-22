@@ -5,6 +5,11 @@ include __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'lib' . D
 require_once(DIR_CLASSES . 'utilities.class.php');
 require_once(DIR_CLASSES . 'request.class.php');
 
+$GLOBALS['ASSET_PREFIX'] = '';
+for ($i = 0; $i < count(Request::$requested_clean_path_array) - 1; $i++) {
+    $GLOBALS['ASSET_PREFIX'] .= '../';
+}
+define('ASSET_PREFIX', $GLOBALS['ASSET_PREFIX']);
 define('BASEURL', 'http' . (is_https() ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . '/' . Request::$url_path_to_script);
 
 $route = matchRoute(ROUTES, Request::$requested_clean_path);
