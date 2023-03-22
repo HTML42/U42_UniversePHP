@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'variables.php';
+include __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'variables.php';
 
 $classes = array_diff(scandir(DIR_CLASSES), array('.', '..'));
 

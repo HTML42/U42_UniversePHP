@@ -6,7 +6,7 @@ define('DIR_PROJECT', str_replace('\\', '/', dirname(dirname(dirname(__DIR__))))
 define('DIR_CORE', DIR_FRAMEWORK . '/core/');
 define('DIR_PLUGINS', DIR_FRAMEWORK . '/plugins/');
 define('DIR_CLASSES', DIR_FRAMEWORK . 'classes/');
-define('DIR_LIB', DIR_FRAMEWORK . 'lib/');
+define('DIR_LIB', DIR_CORE . 'lib/');
 define('DIR_HANDLERS', DIR_PROJECT . '/handlers/');
 define('DIR_MODELS', DIR_PROJECT . '/models/');
 define('DIR_VIEWS', DIR_PROJECT . '/views/');
