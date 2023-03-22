@@ -71,6 +71,7 @@ $index_controller = [
 ];
 
 $json = json_encode($index_controller, JSON_PRETTY_PRINT);
+$json = str_replace('\/', '/', $json); // Fix the path in JSON
 file_put_contents('../controller/index.controller.json', $json);
 
 // Create /handler/index.handler.php
