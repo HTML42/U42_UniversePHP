@@ -9,7 +9,7 @@ class Request {
         if (substr($path_to_script, 0, 1) == '/') {
             $path_to_script = substr($path_to_script, 1);
         }
-        self::$url_path_to_script = str_replace('core/classes/', '', $path_to_script);
+        self::$url_path_to_script = str_replace(DIR_CLASSES, '', $path_to_script);
         preg_match('/\/*(.*)\/*/', $_SERVER['REQUEST_URI'], $match);
         if (strstr($match[1], '?')) {
             $match[1] = preg_replace('/\?.*/', '', $match[1]);
