@@ -28,14 +28,12 @@ if (is_object($handler_class) && $handler_method && method_exists($handler_class
 if (isset($route['view']) && is_string($route['view'])) {
     $try_list = File::_create_try_list($route['view'], ['php', 'html', 'htm', 'tpl', 'js', 'css', 'scss', 'less'], [DIR_VIEWS]);
     $view_file = File::instance_of_first_existing_file($try_list);
-    echo $view_file->get_content();
+    Universe::$content = $view_file->get_content();
 }
 
 // Include mode-specific file if specified in route
-var_dump($route);
 if (isset($route['mode'])) {
     $mode_file = File::instance(DIR_MODES . $route['mode'] . '.php');
-    var_dump($mode_file);
     if($mode_file->exists) {
         include $mode_file->path;
     }

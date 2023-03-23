@@ -1,6 +1,8 @@
 <?php
 
 class Universe {
+    
+    public static $content = null;
 
     function match_route($url) {
         $default_view = [
