@@ -34,7 +34,7 @@ if (isset($route['view']) && is_string($route['view'])) {
 // Include mode-specific file if specified in route
 var_dump($route);
 if (isset($route['mode'])) {
-    $mode_file = File::instance(DIR_MODES . $route['mode']);
+    $mode_file = File::instance(DIR_MODES . $route['mode'] . '.php');
     var_dump($mode_file);
     if($mode_file->exists) {
         include $mode_file->path;
