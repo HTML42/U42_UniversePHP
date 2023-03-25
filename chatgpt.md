@@ -5,15 +5,15 @@ Ein Chatbot-Projekt soll mit Hilfe von ChatGPT erstellt werden, um auf Nutzeranf
 
 ## Ordnerstruktur
 - core/
-- classes/
-    - file.class.php
-    - request.class.php
-    - response.class.php
-    - supermodel.class.php
-    - universe.class.php
-    - utilities.class.php
-- lib/
-    - variables.php
+    - classes/
+        - file.class.php
+        - request.class.php
+        - response.class.php
+        - supermodel.class.php
+        - universe.class.php
+        - utilities.class.php
+    - lib/
+        - variables.php
 - modes/
     - css.php
     - file.php
