@@ -14,6 +14,12 @@ Ein Chatbot-Projekt soll mit Hilfe von ChatGPT erstellt werden, um auf Nutzeranf
     - utilities.class.php
 - lib/
     - variables.php
+- modes/
+    - css.php
+    - file.php
+    - html.php
+    - image.php
+    - js.php
 - plugins/
 - .gitignore
 - conventions.md
@@ -53,3 +59,7 @@ Das Setup des Projekts besteht aus:
 6. Erstellen der Views
 7. Erstellen der Controller
 8. Erstellen des Eingabeformulars
+
+## Weiterlesen
+### Aufgabe: Lese die folgenden MD Dateien durch, um das Framework kennenzulernen:
+https://github.com/HTML42/U42_UniversePHP/blob/master/conventions.md
